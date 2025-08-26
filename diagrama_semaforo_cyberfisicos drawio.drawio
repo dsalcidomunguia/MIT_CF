@@ -1,0 +1,52 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36" version="28.1.1">
+  <diagram id="12a849c9-46f1-4c19-ae4e-5cf4d2cadc34" name="ERD Simple PK-FK">
+    <mxGraphModel dx="1426" dy="1943" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="1002" value="&lt;b style=&quot;font-size:14px&quot;&gt;ubicacion&lt;/b&gt;&lt;div style=&quot;font-size:12px;&quot;&gt;&lt;pre&gt;(PK) id_interseccion : uuid&lt;br&gt;nombre : text&lt;br&gt;latitud : double precision&lt;br&gt;longitud : double precision&lt;br&gt;activo : boolean&lt;br&gt;&lt;br&gt;&lt;/pre&gt;&lt;/div&gt;" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="60" y="40" width="460" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="1003" value="&lt;b style=&#39;font-size:14px&#39;&gt;dispositivo&lt;/b&gt;&lt;div style=&#39;font-size:12px;&#39;&gt;&lt;pre&gt;(PK) id_dispositivo : uuid&#xa;(FK) id_interseccion → interseccion.id_interseccion : uuid&#xa;tipo_dispositivo : enum&#xa;descripcion : text&#xa;instalado_en : timestamptz&#xa;activo : boolean&lt;/pre&gt;&lt;/div&gt;" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="880" y="60" width="460" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="1004" value="&lt;b style=&quot;font-size:14px&quot;&gt;semaforo&lt;/b&gt;&lt;div style=&quot;font-size:12px;&quot;&gt;&lt;pre&gt;(PK) id_estado : uuid&lt;br&gt;(FK) id_interseccion → interseccion.id_interseccion : uuid&lt;br&gt;Boton: bool-- VEHICULAR | PEATONAL&lt;br&gt;color : int-- ROJO | AMBAR | VERDE &lt;/pre&gt;&lt;pre&gt;inicio : timestamptz&lt;br&gt;fin : timestamptz?&lt;/pre&gt;&lt;/div&gt;" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="870" y="450" width="460" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="1005" value="&lt;b style=&quot;font-size:14px&quot;&gt;evento_deteccion&lt;/b&gt;&lt;div style=&quot;font-size:12px;&quot;&gt;&lt;pre&gt;(PK) id_evento : uuid&lt;br&gt;(FK) id_interseccion → interseccion.id_interseccion : uuid&lt;br&gt;(FK) id_dispositivo → dispositivo.id_dispositivo : uuid?&lt;br&gt;ts : timestamptz&lt;br&gt;tipo_evento: integer&lt;br&gt;&lt;br&gt;notas : text/jsonb?&lt;/pre&gt;&lt;/div&gt;" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="850" y="-260" width="460" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="1006" value="&lt;b style=&#39;font-size:14px&#39;&gt;estacionamiento&lt;/b&gt;&lt;div style=&#39;font-size:12px;&#39;&gt;&lt;pre&gt;(PK) id_estacionamiento : uuid&#xa;(FK) id_interseccion → interseccion.id_interseccion : uuid&#xa;nombre : text&#xa;capacidad_total : integer&#xa;ocupados_actual : integer&lt;/pre&gt;&lt;/div&gt;" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="60" y="450" width="460" height="126" as="geometry" />
+        </mxCell>
+        <mxCell id="1007" value="&lt;b style=&quot;font-size:14px&quot;&gt;incidente&lt;/b&gt;&lt;div style=&quot;font-size:12px;&quot;&gt;&lt;pre&gt;(PK) id_incidente : uuid&lt;br&gt;(FK) id_interseccion → interseccion.id_interseccion : uuid&lt;br&gt;ts : timestamptz&lt;br&gt;tipo_incidente : int-- ACCIDENTE | INFRACCION | OBSTRUCCION | OTRO&lt;br&gt;severidad : int-- BAJA | MEDIA | ALTA | CRITICA&lt;br&gt;descripcion : text?&lt;br&gt;&lt;br&gt;&lt;/pre&gt;&lt;/div&gt;" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="880" y="230" width="460" height="158" as="geometry" />
+        </mxCell>
+        <mxCell id="1008" value="&lt;b style=&quot;font-size:14px&quot;&gt;alerta_congestion&lt;/b&gt;&lt;div style=&quot;font-size:12px;&quot;&gt;&lt;pre&gt;(PK) id_alerta : uuid&lt;br&gt;(FK) id_interseccion → interseccion.id_interseccion : uuid&lt;br&gt;inicio : timestamptz&lt;br&gt;fin : timestamptz?&lt;br&gt;nivel : integer  -- 1..5&lt;br&gt;comentario : text&lt;br&gt;&lt;br&gt;&lt;/pre&gt;&lt;/div&gt;" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="520" y="610" width="460" height="174" as="geometry" />
+        </mxCell>
+        <mxCell id="7001" value="FK" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;" parent="1" source="1002" target="1003" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7002" value="FK" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;" parent="1" source="1003" target="1005" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7003" value="FK" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;" parent="1" source="1002" target="1005" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7004" value="FK" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;" parent="1" source="1002" target="1004" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7005" value="FK" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;" parent="1" source="1002" target="1006" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7006" value="FK" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;" parent="1" source="1002" target="1007" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7007" value="FK" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;" parent="1" source="1002" target="1008" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
